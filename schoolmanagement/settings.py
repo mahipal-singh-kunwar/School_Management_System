@@ -157,5 +157,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 RAZORPAY_KEY_ID = "rzp_test_53eiDnA51iPFZK"
 RAZORPAY_KEY_SECRET = "akH5hj2yqdL6Mim7s0rUiYIO"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
