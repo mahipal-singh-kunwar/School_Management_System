@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>School Fee Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body style="text-align:center; margin-top:50px;">
+    <h1>Pay Your School Fee</h1>
+
+    <button id="rzp-button">Pay ₹100</button>
+
+    <script>
+        const options = {
+            "key": "{{ rzp_test_53eiDnA51iPFZK }}", 
+            "amount": "{{ payment.amount }}",
+            "currency": "INR",
+            "name": "School Management",
+            "description": "Fee Payment",
+            "order_id": "{{ payment.id }}",
+            "handler": function (response) {
+                fetch("{% url 'payment_success' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({
+                        student_id: "{{ student_id }}",
+                        payment_id: response.razorpay_payment_id,
+                        order_id: response.razorpay_order_id
+                    })
+                })
+                .then(res => res.json())
+                .then(data => alert("Payment Successful!"))
+                .catch(err => console.error(err));
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        document.getElementById('rzp-button').onclick = function () {
+            rzp.open();
+        };
+    </script>
+</body>
+</html>

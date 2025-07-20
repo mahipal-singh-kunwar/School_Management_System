@@ -1,0 +1,117 @@
+{% extends 'school/adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap + Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: url('{% static "images/black04.jpg" %}') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      padding: 25px;
+      transition: 0.3s ease;
+      height: 100%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card h6 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card i {
+      font-size: 28px;
+    }
+
+    a {
+      text-decoration: none !important;
+      color: #fff;
+    }
+
+    a:hover {
+      color: #ddd;
+    }
+
+    .container {
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+
+    .card-icon {
+      float: left;
+      margin-right: 15px;
+    }
+
+    .text-right {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          <a href="{% url 'admin-view-teacher' %}">
+            <h6><i class="fas fa-eye card-icon"></i> View All Teachers</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          
+          <a href="{% url 'admin-add-teacher' %}">
+            <h6><i class="fas fa-plus-circle card-icon"></i> Add Teacher</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          <a href="{% url 'admin-approve-teacher' %}">
+            <h6><i class="fas fa-check-circle card-icon"></i> Approve Teacher</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+         <a href="{% url 'admin-view-teacher-salary' %}">
+         <h6>
+        <span style="font-weight: bold; margin-right: 8px; font-size: inherit;">₹</span>
+        Teachers Salary
+        </h6>
+
+          </a>
+       </div>
+     </div>
+
+    </div>
+  </div>
+</body>
+{% endblock content %}

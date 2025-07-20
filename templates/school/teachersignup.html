@@ -1,0 +1,246 @@
+{% include "school/navbar.html" %}
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apply for Teacher Job</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #3498db;
+      --text-color: #ffffff;
+      --placeholder: #cccccc;
+      --card-bg: rgba(223, 196, 196, 0.07);
+      --border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: url("{% static 'images/black2.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 0;
+    }
+
+    nav.navbar {
+      background-color: rgba(0, 0, 0, 0.6) !important;
+      backdrop-filter: blur(5px);
+      z-index: 10;
+    }
+
+    .page-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 850px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+      padding: 40px;
+      animation: fadeIn 0.5s ease;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .form-group {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-control {
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.1);
+      color: white !important;
+      font-size: 15px;
+      transition: 0.3s ease;
+      appearance: none;
+    }
+
+    .form-control::placeholder {
+      color: var(--placeholder);
+    }
+
+    .form-control:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    select.form-control {
+  padding: 14px 15px;
+  height: 48px; /* fixed height to make sure full text shows */
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.5;
+  transition: 0.3s ease;
+  appearance: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+
+
+    option {
+      color: black; /* dropdown item text color */
+    }
+
+    .btnSubmit {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px rgba(52, 152, 219, 0.3);
+    }
+
+    .btnSubmit:hover {
+      background: #2980b9;
+      box-shadow: 0 0 16px rgba(41, 128, 185, 0.5);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .login-link a {
+      color: #ffffff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      color: #f1f1f1;
+    }
+
+    footer {
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        width: 100%;
+      }
+
+      .card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+  <div class="card">
+    <h2>Apply for Teacher Job</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        {% render_field form1.first_name class="form-control" placeholder="First Name" %}
+      </div>
+      <div class="form-group">
+        {% render_field form1.last_name class="form-control" placeholder="Last Name" %}
+      </div>
+      <div class="form-group">
+        {% render_field form1.username class="form-control" placeholder="Username" %}
+      </div>
+      <div class="form-group">
+        {% render_field form1.password class="form-control" type="password" placeholder="Password" %}
+      </div>
+      <div class="form-group">
+        {% render_field form2.mobile class="form-control" placeholder="Contact" %}
+      </div>
+      <div class="form-group">
+        {% render_field form2.salary class="form-control" placeholder="Salary (₹)" %}
+      </div>
+      <div class="form-group" style="width: 100%;">
+  {% render_field form2.department class="form-control" %}
+</div>
+      <button type="submit" class="btnSubmit">Apply</button>
+    </form>
+    <div class="login-link">
+      Already have an account? <a href="{% url 'teacherlogin' %}">Login here</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  {% include "school/footer.html" %}
+</footer>
+
+</body>
+</html>

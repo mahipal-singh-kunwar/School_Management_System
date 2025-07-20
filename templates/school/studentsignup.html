@@ -1,0 +1,218 @@
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Admission | School Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent:rgb(59, 124, 167);
+      --text-color: #ffffff;
+      --placeholder: #bbbbbb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: url("{% static 'images/black06.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 0;
+    }
+
+    .page-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 950px;
+      background-color: rgba(255, 255, 255, 0.06) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      padding: 40px;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--accent);
+      font-size: 26px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .form-group {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-control {
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(159, 88, 88, 0.12) !important;
+      color: #fff !important;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    .form-control::placeholder {
+      color: var(--placeholder);
+    }
+
+    .form-control:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.18);
+      border-color: var(--accent);
+    }
+
+    .btnSubmit {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: 0.3s ease;
+    }
+
+    .btnSubmit:hover {
+      background: #2980b9;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #eee;
+    }
+
+    .login-link a {
+      color: #00aced;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        width: 100%;
+      }
+
+      .card {
+        padding: 30px;
+      }
+    }
+###
+    select.form-control {
+    background: rgba(220, 130, 130, 0.18) !important;
+    color:rgb(65, 39, 39);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+   -moz-appearance: none;
+}
+
+    select.form-control option {
+    background-color: #222;
+  color: #fff;
+}
+
+  </style>
+</head>
+
+<body>
+  {% include "school/navbar.html" %}
+
+  <div class="page-wrapper">
+    <div class="card">
+      <h2>New Admission to School</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          {% render_field form1.first_name class="form-control" placeholder="First Name" %}
+        </div>
+        <div class="form-group">
+          {% render_field form1.last_name class="form-control" placeholder="Last Name" %}
+        </div>
+        <div class="form-group">
+          {% render_field form1.username class="form-control" placeholder="Username" %}
+        </div>
+        <div class="form-group">
+          {% render_field form1.password class="form-control" type="password" placeholder="Password" %}
+        </div>
+        <div class="form-group">
+          {% render_field form2.cl class="form-control" placeholder="Class" %}
+        </div>
+        <div class="form-group">
+          {% render_field form2.roll class="form-control" placeholder="Roll" %}
+        </div>
+        <div class="form-group">
+          {% render_field form2.mobile class="form-control" placeholder="Contact" %}
+        </div>
+        <div class="form-group">
+          {% render_field form2.fee class="form-control" placeholder="Fee" %}
+        </div>
+
+        <button type="submit" class="btnSubmit">Take Admission</button>
+      </form>
+
+      <div class="login-link">
+        Already have an account? <a href="{% url 'studentlogin' %}">Login here</a>
+      </div>
+    </div>
+  </div>
+
+  {% include "school/footer.html" %}
+</body>
+</html>

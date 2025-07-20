@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard | SchoolMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FontAwesome and Bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1531347854227-aec59f4903f7?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    .card {
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+      color: #fff;
+      height: 180px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    .card .card-block {
+      width: 100%;
+      padding: 20px;
+    }
+
+    .card h6,
+    .card h2,
+    .card i,
+    .card span {
+      color: #ffffff !important;
+    }
+
+    .card h6 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+    }
+
+    .card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    }
+
+    .container {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        height: auto;
+      }
+    }
+
+    .calendar-btn {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .calendar-btn a {
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #06b6d4, #4f46e5);
+      color: white !important;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+      transition: 0.3s ease;
+      display: inline-block;
+    }
+
+    .calendar-btn a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.8);
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Total Teacher</h6>
+            <h2><i class="fas fa-chalkboard-teacher f-left"></i><span class="f-right">{{teachercount}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Total Student</h6>
+            <h2><i class="fas fa-user-graduate f-left"></i><span class="f-right">{{studentcount}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Teacher's Salary</h6>
+             <h2>
+              <span class="f-left" style="font-weight: bold;">₹</span>
+               <span class="f-right">{{ studentfee }}</span>
+             </h2>
+          </div>
+        </div>
+       </div>
+
+      <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block p-3">
+           <h6>Student Fee</h6>
+           <h2>
+            <span class="f-left" style="font-weight: bold;">₹</span>
+            <span class="f-right">{{ studentfee }}</span>
+          </h2>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Pending Teacher</h6>
+            <h2><i class="fas fa-spinner f-left"></i><span class="f-right">{{pendingteachercount}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Pending Admissions</h6>
+            <h2><i class="fas fa-spinner f-left"></i><span class="f-right">{{pendingstudentcount}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Pending Salary</h6>
+            <h2><i class="fas fa-spinner f-left"></i><span class="f-right">{{pendingteachersalary}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3 mb-4">
+        <div class="card">
+          <div class="card-block">
+            <h6>Pending Dues</h6>
+            <h2><i class="fas fa-spinner f-left"></i><span class="f-right">{{pendingstudentfee}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="calendar-btn">
+      <a href="{% url 'calendar' %}">📅 View School Calendar</a>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

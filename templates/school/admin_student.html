@@ -1,0 +1,110 @@
+{% extends 'school/adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: url('{% static "images/black02.jpg" %}') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      padding: 25px;
+      height: 100%;
+      transition: 0.3s ease-in-out;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card h6 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card i {
+      font-size: 30px;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #dcdcdc;
+    }
+
+    .container {
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+
+    .card-icon {
+      float: left;
+      margin-right: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          <a href="/admin-view-student">
+            <h6><i class="fas fa-eye card-icon"></i> View All Students</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          <a href="/admin-add-student">
+            <h6><i class="fas fa-plus-circle card-icon"></i> Add Student</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          <a href="/admin-approve-student">
+            <h6><i class="fas fa-check-circle card-icon"></i> Approve Student</h6>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-3">
+        <div class="glass-card">
+          <a href="/admin-view-student-fee">
+            <h6><i class=" ">₹</i> View Student Fee</h6>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+{% endblock content %}

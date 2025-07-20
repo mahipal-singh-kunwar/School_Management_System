@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SMS - Student</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Icons & Font -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sidebar-width: 250px;
+      --sidebar-collapsed-width: 70px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #1b2838);
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 60px;
+      width: 100%;
+      background: #22242A;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .left_area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .left_area h3 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .right_area {
+      display: flex;
+      align-items: center;
+    }
+
+    .logout_btn {
+      background-color: #e53935;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 1px 1px 3px #000;
+      transition: background 0.3s ease;
+    }
+
+    .logout_btn:hover {
+      background-color: #c62828;
+    }
+
+    #check {
+      display: none;
+    }
+
+    #sidebar_btn {
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background: #2f323a;
+      padding-top: 30px;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .sidebar.collapsed {
+      width: var(--sidebar-collapsed-width);
+    }
+
+    .sidebar center {
+      transition: all 0.3s ease;
+    }
+
+    .profile_image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .sidebar h4 {
+      color: #ccc;
+      margin: 0 0 20px 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      padding: 12px 20px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #3a3f51;
+    }
+
+    .sidebar i {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .sidebar.collapsed a span {
+      display: none;
+    }
+
+    .content {
+      margin-top: 60px;
+      margin-left: var(--sidebar-width);
+      padding: 20px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .content.collapsed {
+      margin-left: var(--sidebar-collapsed-width);
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: var(--sidebar-collapsed-width);
+      }
+
+      .sidebar a span,
+      .sidebar h4,
+      .profile_image {
+        display: none;
+      }
+
+      .content {
+        margin-left: var(--sidebar-collapsed-width);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <input type="checkbox" id="check">
+
+  <!-- Header -->
+  <header>
+    <div class="left_area">
+      <label for="check"><i class="fas fa-bars" id="sidebar_btn"></i></label>
+      <h3>SMS - <span>STUDENT</span></h3>
+    </div>
+    <div class="right_area">
+      <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout_btn">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <center>
+      <img src="{% static 'images/user-default.png' %}" class="profile_image" alt="User Image">
+      <h4>{{ request.user.first_name }}</h4>
+    </center>
+    <a href="/student-dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+    <a href="/student-attendance"><i class="fas fa-address-card"></i><span>View Attendance</span></a>
+  </div>
+
+  <!-- Content -->
+  <div class="content" id="main-content">
+    {% block content %}
+    <!-- Your dashboard content here -->
+    {% endblock %}
+    {% include "school/footer.html" %}
+  </div>
+
+  <!-- Script -->
+  <script>
+    const check = document.getElementById('check');
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('main-content');
+
+    check.addEventListener('change', function () {
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('collapsed');
+    });
+  </script>
+</body>
+</html>

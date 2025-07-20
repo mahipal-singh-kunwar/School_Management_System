@@ -1,0 +1,24 @@
+<form method="post">
+  {% csrf_token %}
+  <input type="date" name="date" value="{{ date }}" required><br><br>
+
+  <table border="1">
+    <tr>
+      <th>Roll No</th>
+      <th>Name</th>
+      <th>Attendance</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+      <td>{{ student.roll }}</td>
+      <td>{{ student.get_name }}</td>
+      <td>
+        <input type="radio" name="{{ student.id }}" value="Present" required> Present
+        <input type="radio" name="{{ student.id }}" value="Absent"> Absent
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <input type="submit" value="Save Attendance">
+</form>

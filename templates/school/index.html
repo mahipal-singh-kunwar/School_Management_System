@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SchoolMS | Stunning Landing Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <style>
+    * { scroll-behavior: smooth; }
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    .animated-wave {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      animation: waveMove 6s infinite linear;
+      opacity: 0.04;
+    }
+    @keyframes waveMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 0; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-white text-gray-800 relative overflow-x-hidden">
+
+<div class="animated-wave"></div>
+
+<!-- Navbar -->
+<header class="fixed w-full bg-white shadow z-50">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold text-blue-600 flex items-center">
+      <i class="fas fa-school mr-2 text-indigo-600"></i> SchoolMS
+    </a>
+    <nav class="hidden md:flex space-x-6">
+      <a href="#" class="text-gray-600 hover:text-blue-500 flex items-center">
+        <i class="fas fa-home text-blue-500 mr-1"></i> Home
+      </a>
+      <a href="/adminclick" class="text-gray-600 hover:text-red-500 flex items-center">
+        <i class="fas fa-user-shield text-red-500 mr-1"></i> Admin
+      </a>
+      <a href="/teacherclick" class="text-gray-600 hover:text-purple-500 flex items-center">
+        <i class="fas fa-chalkboard-teacher text-purple-500 mr-1"></i> Teachers
+      </a>
+      <a href="/studentclick" class="text-gray-600 hover:text-yellow-500 flex items-center">
+        <i class="fas fa-user-graduate text-yellow-500 mr-1"></i> Students
+      </a>
+      <a href="/studentsignup" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition">
+        <i class="fas fa-user-plus mr-1"></i> Join Now
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="pt-32 pb-20 md:pb-32 bg-gradient-to-br from-blue-100 to-blue-50">
+  <div class="container mx-auto flex flex-col md:flex-row items-center px-4">
+    <div class="w-full md:w-1/2 mb-10 md:mb-0" data-aos="fade-up">
+      <h1 class="text-5xl font-extrabold leading-tight text-blue-900">
+        Manage School Smartly with <span class="text-blue-500">SchoolMS</span>
+      </h1>
+      <p class="mt-6 text-lg text-gray-700">
+        All-in-one solution for students, teachers, attendance, and fee management.
+      </p>
+      <a href="/studentsignup" class="inline-block mt-6 px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-full shadow hover:bg-blue-700 transition">
+        Get Started
+      </a>
+    </div>
+    <div class="w-full md:w-1/2" data-aos="fade-left">
+      <img src="{% static 'images/kid.jpg' %}" alt="School Kid" class="rounded-2xl shadow-xl w-full max-w-md mx-auto hover:scale-105 transition-transform duration-500" />
+    </div>
+  </div>
+</section>
+<!-- Tagda Design Section Heading -->
+<div class="text-center mb-12" data-aos="fade-down">
+  <h2 class="text-4xl font-extrabold text-blue-700 flex justify-center items-center gap-3">
+    <i class="fas fa-laptop-code text-indigo-500 text-4xl"></i>
+    Interactive Smart Learning
+  </h2>
+  <p class="text-gray-600 mt-2 text-lg">Visualize education with motion — experience modern learning tools.</p>
+  <div class="w-24 h-1 mx-auto mt-4 bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 rounded-full"></div>
+</div>
+
+
+<!-- Lottie Animation Row Section -->
+<section class="py-16 bg-transparent">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12"></h2>
+    <div class="flex flex-wrap justify-center gap-8" data-aos="fade-up">
+
+      <!-- Animation 1 -->
+    <div id="lottie-education" class="w-full max-w-xs glow-border p-4 bg-white/60 rounded-xl backdrop-blur-md"></div>
+
+      <!-- Animation 2 -->
+        <div id="lottie-learning" class="w-full max-w-xs glow-border p-4 bg-white/60 rounded-xl backdrop-blur-md"></div>
+
+       <!-- Animation 3 -->
+      <div id="lottie-school" class="w-full max-w-xs glow-border p-4 bg-white/60 rounded-xl backdrop-blur-md"></div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animation 1
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-education'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: "{% static 'animations/Educatin.json' %}"
+  });
+
+  // Animation 2
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-learning'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: "{% static 'animations/school.json' %}"
+  });
+
+  // Animation 3
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-school'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: "{% static 'animations/learning.json' %}"
+  });
+</script>
+
+
+
+<!-- Teachers Section -->
+<section class="pt-32 pb-20 md:pb-32 bg-gradient-to-br from-blue-100 to-blue-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Meet Our Teachers</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      
+      <!-- Mathematics -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in">
+  <img src="{% static 'images/math_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Ms. Shalini Mishra</h4>
+  <p class="text-gray-600"><i class="fas fa-square-root-alt text-blue-500 mr-1"></i> Mathematics | 12 Years</p>
+  <a href="{% url 'profile_detail' slug='ms-shalini-mishra' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Biology -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
+  <img src="{% static 'images/biology_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Mr. Rajeev Sharma</h4>
+  <p class="text-gray-600"><i class="fas fa-dna text-green-500 mr-1"></i> Biology | 10 Years</p>
+  <a href="{% url 'profile_detail' slug='mr-rajeev-sharma' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- English -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="200">
+  <img src="{% static 'images/english_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Ms. Neha Joshi</h4>
+  <p class="text-gray-600"><i class="fas fa-book text-pink-500 mr-1"></i> English | 15 Years</p>
+  <a href="{% url 'profile_detail' slug='ms-neha-joshi' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Drawing -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in">
+  <img src="{% static 'images/drawing_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Ms. Ritu Bansal</h4>
+  <p class="text-gray-600"><i class="fas fa-palette text-yellow-500 mr-1"></i> Drawing | 8 Years</p>
+  <a href="{% url 'profile_detail' slug='ms-ritu-bansal' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Physics -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
+  <img src="{% static 'images/Physics_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Mr. Sandeep Yadav</h4>
+  <p class="text-gray-600"><i class="fas fa-atom text-purple-500 mr-1"></i> Physics | 11 Years</p>
+  <a href="{% url 'profile_detail' slug='mr-sandeep-yadav' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Social Science -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="200">
+  <img src="{% static 'images/social_science.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Ms. Anjali Thakur</h4>
+  <p class="text-gray-600"><i class="fas fa-globe-asia text-teal-500 mr-1"></i> Social Science | 9 Years</p>
+  <a href="{% url 'profile_detail' slug='ms-anjali-thakur' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Chemistry -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
+  <img src="{% static 'images/chemistry_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Ms. Priya Nair</h4>
+  <p class="text-gray-600"><i class="fas fa-vials text-green-600 mr-1"></i> Chemistry | 8 Years</p>
+  <a href="{% url 'profile_detail' slug='ms-priya-nair' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Hindi -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
+  <img src="{% static 'images/hindi_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Mrs. Jyoti Tiwari</h4>
+  <p class="text-gray-600"><i class="fas fa-language text-orange-500 mr-1"></i> Hindi | 14 Years</p>
+  <a href="{% url 'profile_detail' slug='mrs-jyoti-tiwari' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+
+<!-- Computer -->
+<div class="bg-white p-6 rounded-lg text-center shadow-lg card-hover transition transform hover:-translate-y-2 hover:shadow-xl overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
+  <img src="{% static 'images/computer_teacher.jpg' %}" class="w-28 h-28 object-cover rounded-full mx-auto border-4 border-indigo-500 mb-4" />
+  <h4 class="text-xl font-semibold">Ms. Kabita Desai</h4>
+  <p class="text-gray-600"><i class="fas fa-laptop-code text-cyan-600 mr-1"></i> Computer | 12 Years</p>
+  <a href="{% url 'profile_detail' slug='ms-kabita-desai' %}" class="text-blue-500 mt-2 inline-block hover:underline text-sm">View Profile</a>
+</div>
+    </div>
+  </section>
+
+<!--topper 10th -->
+
+<section class="pt-32 pb-20 bg-gradient-to-br from-yellow-50 to-yellow-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">10th Class Toppers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Topper 1 -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/topper6.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 object-cover">
+        <h4 class="text-xl font-semibold">Priya Verma</h4>
+        <p class="text-gray-600">10th | 97.8% | CBSE</p>
+        <a href="{% url 'profile_detail' slug='priya-verma' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+
+  <!-- Topper 2-->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/topperb.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 object-cover">
+        <h4 class="text-xl font-semibold">Ankur Sharma</h4>
+        <p class="text-gray-600">10th | 97.8% | CBSE</p>
+        <a href="{% url 'profile_detail' slug='ankur-sharma' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+  
+
+  <!-- Topper 3-->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/topperg1.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-yellow-400 object-cover">
+        <h4 class="text-xl font-semibold">Meena Yadav</h4>
+        <p class="text-gray-600">10th | 97.8% | CBSE</p>
+        <a href="{% url 'profile_detail' slug='meena-yadav' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+</div>
+</section>
+
+<!--topper  12th  -->
+<section class="py-20 bg-gradient-to-br from-green-50 to-green-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">12th Class Toppers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Topper 1 -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/topperb6.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-green-400 object-cover">
+        <h4 class="text-xl font-semibold">Rahul Dey</h4>
+        <p class="text-gray-600">12th | 98.6% | Science</p>
+        <a href="{% url 'profile_detail' slug='rahul-dey' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+      <!-- Topper 2 -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/topper2.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-green-400 object-cover">
+        <h4 class="text-xl font-semibold">Ananya Singh</h4>
+        <p class="text-gray-600">12th | 98.6% | Science</p>
+        <a href="{% url 'profile_detail' slug='ananya-singh' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+      <!-- Topper 2 -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/topperb3.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-green-400 object-cover">
+        <h4 class="text-xl font-semibold">Kunal-Verma</h4>
+        <p class="text-gray-600">12th | 98.6% | MAth</p>
+        <a href="{% url 'profile_detail' slug='kunal-verma' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!--best in class -->
+
+<section class="py-20 bg-gradient-to-br from-indigo-50 to-indigo-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Best in Class</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Card 1: Discipline -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/discpline.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-indigo-400 object-cover" />
+        <h4 class="text-xl font-semibold">Kritika Sharma</h4>
+        <p class="text-gray-600">Class 10th | Discipline</p>
+        <a href="{% url 'profile_detail' slug='kritika-sharma' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+
+      <!-- Card 2: Sports -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/sports.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-indigo-400 object-cover" />
+        <h4 class="text-xl font-semibold">Rohit Chauhan</h4>
+        <p class="text-gray-600">Class 12th | Sports</p>
+        <a href="{% url 'profile_detail' slug='rohit-chauhan' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+
+      <!-- Card 3: Leadership -->
+      <div class="bg-white p-6 rounded-lg text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+        <img src="{% static 'images/leadership.jpg' %}" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-indigo-400 object-cover" />
+        <h4 class="text-xl font-semibold">Tanya Kapoor</h4>
+        <p class="text-gray-600">Class 10th | Leadership</p>
+        <a href="{% url 'profile_detail' slug='tanya-kapoor' %}" class="text-blue-600 text-sm hover:underline mt-2 inline-block">View Profile</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Community Hub -->
+<section class="py-20 bg-white text-center">
+  <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Join Our Community</h2>
+  <div class="flex flex-wrap justify-center gap-6" data-aos="fade-up" data-aos-delay="100">
+    <a href="/teacherclick" class="px-6 py-3 border-2 border-purple-600 rounded-full text-purple-600 font-medium hover:bg-purple-600 hover:text-white transition">
+      <i class="fas fa-chalkboard-teacher mr-2"></i> Teachers</a>
+    <a href="/studentclick" class="px-6 py-3 border-2 border-yellow-500 rounded-full text-yellow-500 font-medium hover:bg-yellow-500 hover:text-white transition">
+      <i class="fas fa-user-graduate mr-2"></i> Students</a>
+    <a href="/contact" class="px-6 py-3 border-2 border-blue-600 rounded-full text-blue-600 font-medium hover:bg-blue-600 hover:text-white transition">
+      <i class="fas fa-envelope mr-2"></i> Contact</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-blue-50 text-center py-6 text-gray-600 text-sm">
+  © 2025 School Management System. All rights reserved. <br />
+  <a href="/about" class="text-blue-600 hover:underline">About Us</a> | 
+  <a href="/contact" class="text-blue-600 hover:underline">Contact</a>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ duration: 1000, once: true });</script>
+</body>
+</html>

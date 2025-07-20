@@ -1,0 +1,234 @@
+{% extends 'school/adminbase.html' %} 
+{% load static %}
+
+{% block content %}
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+
+    .chart-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(16px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .chart-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.4), 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .chart-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px #00ffff;
+      color: #ffffff;
+    }
+
+    .super-button-container {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .super-button {
+      padding: 14px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    }
+
+    .super-button:hover {
+      background: linear-gradient(135deg, #06b6d4, #4f46e5);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.7);
+      transform: scale(1.05);
+    }
+
+    .notice-title-box {
+      padding: 14px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      border: none;
+      border-radius: 50px;
+      pointer-events: none;
+      text-shadow: 1px 1px 3px #000;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .notice-card {
+      background: rgba(255, 0, 0, 0.08);
+      border-left: 5px solid #ef4444;
+      padding: 20px;
+      margin: 15px auto;
+      width: 70%;
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+    }
+
+    .notice-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.4), 0 0 10px rgba(239, 68, 68, 0.3);
+    }
+
+    .notice-title {
+      font-weight: bold;
+      color: #f87171;
+      font-size: 16px;
+    }
+
+    .notice-by {
+      font-size: 14px;
+      color: #fecaca;
+    }
+
+    .notice-msg {
+      margin-top: 5px;
+      font-size: 15px;
+      color: #ffe4e6;
+    }
+  </style>
+</head>
+
+<br>
+{% include 'school/admin_dashboard_cards.html' %}
+
+
+
+<!-- 📊 Charts Section -->
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart-box">
+        <h5 class="chart-title">📊 Monthly Attendance</h5>
+        <canvas id="attendanceChart" height="200"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-box">
+        <h5 class="chart-title">📈 Monthly Fees Collected</h5>
+        <canvas id="feeChart" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 📥 PDF Download Button -->
+<div class="super-button-container">
+  <a href="{% url 'export_attendance_pdf' %}" class="super-button">
+    📄 Download Attendance PDF
+  </a>
+</div>
+
+<!--  Notice Board Section -->
+<div class="super-button-container">
+  <div class="notice-title-box">
+    📢 Notice Board
+  </div>
+</div>
+
+<div class="container my-3">
+  {% for n in notice %}
+    <div class="notice-card">
+      <div class="notice-title">📅 {{ n.date }}</div>
+      <div class="notice-by">By: {{ n.by }}</div>
+      <div class="notice-msg">{{ n.message }}</div>
+    </div>
+  {% empty %}
+    <div class="notice-card" style="text-align: center;">
+      <p style="color: #ffe4e6;">No notices available.</p>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- 📈 Chart Script -->
+<script>
+  const attendanceData = JSON.parse('{{ attendance_json|escapejs }}');
+  const feeData = JSON.parse('{{ fee_json|escapejs }}');
+  const months = Object.keys(attendanceData);
+
+  const attCtx = document.getElementById('attendanceChart').getContext('2d');
+  const feeCtx = document.getElementById('feeChart').getContext('2d');
+
+  const gradient = feeCtx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
+  gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+  new Chart(attCtx, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Attendance',
+        data: Object.values(attendanceData),
+        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+        borderColor: 'rgba(59, 130, 246, 1)',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Attendance per Month', color: '#fff' },
+        legend: { labels: { color: '#fff' } }
+      },
+      scales: {
+        x: { ticks: { color: '#fff' } },
+        y: { ticks: { color: '#fff' } }
+      }
+    }
+  });
+
+  new Chart(feeCtx, {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Fees Collected',
+        data: Object.values(feeData),
+        fill: true,
+        backgroundColor: gradient,
+        borderColor: 'rgba(6, 182, 212, 1)',
+        tension: 0.4,
+        pointRadius: 6,
+        pointHoverRadius: 9,
+        pointBackgroundColor: '#0ea5e9',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointStyle: 'circle'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Fees Collected per Month', color: '#fff' },
+        legend: { labels: { color: '#fff' } }
+      },
+      scales: {
+        x: { ticks: { color: '#fff' } },
+        y: { ticks: { color: '#fff' } }
+      }
+    }
+  });
+</script>
+{% endblock content %}

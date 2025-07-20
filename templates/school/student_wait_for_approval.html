@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>SMS - Django</title>
+
+  <style>
+    .jumbotron {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      text-align: center;
+    }
+
+    .alert {
+      margin: 0px;
+    }
+
+    .logout-form {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  {% include "school/navbar.html" %}
+  <br><br>
+
+  <div class="jumbotron">
+    <h1 class="display-4">Hello {{ request.user.first_name }},</h1>
+    <p class="lead">
+      Your Account has not been approved yet!<br><br>
+      Our Administrative Team will be checking it soon.<br><br>
+      And, soon your admission will be confirmed! You'll get to access the system after the confirmation.
+    </p>
+    <p class="lead">Thank you for signing up. We'll see you soon.</p>
+    <hr class="my-4">
+    <p>Check Later</p>
+
+    <!-- Centered Logout Button -->
+    <div class="logout-form">
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-lg">Logout</button>
+      </form>
+    </div>
+  </div>
+
+  {% include "school/footer.html" %}
+</body>
+</html>

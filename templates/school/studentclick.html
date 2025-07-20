@@ -1,0 +1,18 @@
+{% extends 'school/homebase.html' %}
+
+{% block title %}Student Panel | School Management System{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <div class="glass-box">
+    <h1 class="display-4">Student Login Panel</h1>
+    <p class="lead">Welcome to School Management System.</p>
+    <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+    <p>Please select any to continue...</p>
+    <div style="margin-top: 20px;">
+      <a class="btn-glow danger" href="/studentsignup">New Admission</a>
+      <a class="btn-glow success" href="/studentlogin">Login</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

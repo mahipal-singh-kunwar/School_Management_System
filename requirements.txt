@@ -1,0 +1,5 @@
+Django>=5.2.3
+asgiref>=3.7.2
+django-widget-tweaks>=1.5.0
+pytz>=2024.1
+sqlparse>=0.4.4

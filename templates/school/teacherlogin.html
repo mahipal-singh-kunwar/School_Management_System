@@ -1,0 +1,158 @@
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher Login | School Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: url("{% static 'images/black2.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    nav.navbar {
+      background-color: rgba(0, 0, 0, 0.6) !important;
+      backdrop-filter: blur(5px);
+      z-index: 10;
+    }
+
+    .login-section {
+      padding: 80px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 700px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .glass-card h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-control {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 8px #0d6efd;
+      outline: none;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background: #0d6efd;
+      border: none;
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+    }
+
+    .btn-login:hover {
+      background: #0b5ed7;
+      box-shadow: 0 0 20px rgba(13, 110, 253, 0.5);
+    }
+
+    .signup-link {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .signup-link a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    @media (max-width: 768px) {
+      .glass-card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% include "school/navbar.html" %}
+
+  <section class="login-section">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="glass-card">
+        <h2>Teacher Login</h2>
+
+        <div class="mb-3">
+          {% render_field form.username class="form-control" placeholder="Username" %}
+        </div>
+
+        <div class="mb-3">
+          {% render_field form.password class="form-control" placeholder="Password" %}
+        </div>
+
+        <div class="mb-3">
+          {% render_field form.image class="form-control" %}
+        </div>
+
+        <button type="submit" class="btn-login">Login</button>
+
+        <div class="signup-link">
+          Don’t have an account? <a href="/teachersignup">Sign up here</a>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    {% include "school/footer.html" %}
+  </footer>
+</body>
+</html>
