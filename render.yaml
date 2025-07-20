@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: schoolms
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn schoolmanagement.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: your-actual-secret-key
+      - key: PYTHON_VERSION
+        value: 3.11.8
