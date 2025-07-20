@@ -27,8 +27,7 @@ SECRET_KEY = 'k0ujs9pcw+7qohwas!o7_ept20$c@$)-b=qco8sgviy_f)((bc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['mahipal8474.pythonanywhere.com']
 
 # Application definition
 
@@ -156,4 +155,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 RAZORPAY_KEY_ID = "rzp_test_53eiDnA51iPFZK"
 RAZORPAY_KEY_SECRET = "akH5hj2yqdL6Mim7s0rUiYIO"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
